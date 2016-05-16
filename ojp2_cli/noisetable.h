@@ -11,17 +11,18 @@ protected:
 	std::random_device r;
 	int size;
 	bool color;
+	int pixelsize;
 public:
-	noisetable(int xy, bool clr) : size(xy), color(clr)
+	noisetable(int xy, bool clr,int pixels) : size(xy), color(clr), pixelsize(pixels)
 	{
-		int sizemult = size*size;
+		int sizemult = size;
 		if (color)
 			sizemult *= 3;
 			
 		std::default_random_engine e1(r());
 		std::uniform_real_distribution <double> dist(0, 256);
-		table = (double*)calloc(sizemult, sizeof(double));
-		for (auto j = 0; j < sizemult; j++) {
+		table = (double*)calloc(size*sizemult, sizeof(double));
+		for (auto j = 0; j < size*sizemult; j++) {
 			table[j] = dist(e1);
 			//table[j] = rand() % 256;
 		}
@@ -32,13 +33,26 @@ public:
 			file << "P3" << std::endl;
 		else
 			file << "P2" << std::endl;
-		file << size << " " << size << std::endl;
+		file << size*pixelsize << " " << size*pixelsize << std::endl;
 		file << 256 << std::endl;
-			for (auto j = 0; j < sizemult; j++) {
-				file << table[j] << " ";
+
+		for (auto i = 0; i < size; i++) {
+			for (auto h = 0; h < pixelsize; h++) {
+				for (auto k = 0; k < size*sizemult; k++) {
+					for (auto j = 0; j < pixelsize; j++) {
+						file << table[i*size+k] << " ";
+					}
+				}
+				file << std::endl;
 			}
+		}
+
+
 		file.close();
 	}
+	//for (auto j = 0; j < sizemult; j++) {
+	//		file << table[j] << " ";
+	//}
 	double getval(int x) {
 		return table[x];
 	}

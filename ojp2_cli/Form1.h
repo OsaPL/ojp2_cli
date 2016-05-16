@@ -44,6 +44,8 @@ namespace WindowsFormApplication1 {
 	private: System::Windows::Forms::RadioButton^  radioButtonColor;
 	private: System::Windows::Forms::RadioButton^  radioButtonSmooth;
 	private: System::Windows::Forms::RadioButton^  radioButtonNoSmooth;
+	private: System::Windows::Forms::TextBox^  textBoxPixelSize;
+
 
 
 
@@ -70,12 +72,13 @@ namespace WindowsFormApplication1 {
 			this->radioButtonColor = (gcnew System::Windows::Forms::RadioButton());
 			this->radioButtonSmooth = (gcnew System::Windows::Forms::RadioButton());
 			this->radioButtonNoSmooth = (gcnew System::Windows::Forms::RadioButton());
+			this->textBoxPixelSize = (gcnew System::Windows::Forms::TextBox());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox))->BeginInit();
 			this->SuspendLayout();
 			// 
 			// buttonRefresh
 			// 
-			this->buttonRefresh->Location = System::Drawing::Point(659, 86);
+			this->buttonRefresh->Location = System::Drawing::Point(658, 159);
 			this->buttonRefresh->Name = L"buttonRefresh";
 			this->buttonRefresh->Size = System::Drawing::Size(75, 23);
 			this->buttonRefresh->TabIndex = 0;
@@ -97,12 +100,13 @@ namespace WindowsFormApplication1 {
 			this->textBoxResolution->Name = L"textBoxResolution";
 			this->textBoxResolution->Size = System::Drawing::Size(75, 20);
 			this->textBoxResolution->TabIndex = 4;
-			this->textBoxResolution->Text = L"640";
+			this->textBoxResolution->Text = L"20";
 			// 
 			// radioButtonMono
 			// 
 			this->radioButtonMono->AutoSize = true;
-			this->radioButtonMono->Location = System::Drawing::Point(659, 39);
+			this->radioButtonMono->Checked = true;
+			this->radioButtonMono->Location = System::Drawing::Point(658, 112);
 			this->radioButtonMono->Name = L"radioButtonMono";
 			this->radioButtonMono->Size = System::Drawing::Size(87, 17);
 			this->radioButtonMono->TabIndex = 5;
@@ -113,7 +117,7 @@ namespace WindowsFormApplication1 {
 			// radioButtonColor
 			// 
 			this->radioButtonColor->AutoSize = true;
-			this->radioButtonColor->Location = System::Drawing::Point(659, 63);
+			this->radioButtonColor->Location = System::Drawing::Point(658, 136);
 			this->radioButtonColor->Name = L"radioButtonColor";
 			this->radioButtonColor->Size = System::Drawing::Size(49, 17);
 			this->radioButtonColor->TabIndex = 6;
@@ -124,7 +128,7 @@ namespace WindowsFormApplication1 {
 			// radioButtonSmooth
 			// 
 			this->radioButtonSmooth->AutoSize = true;
-			this->radioButtonSmooth->Location = System::Drawing::Point(658, 162);
+			this->radioButtonSmooth->Location = System::Drawing::Point(657, 235);
 			this->radioButtonSmooth->Name = L"radioButtonSmooth";
 			this->radioButtonSmooth->Size = System::Drawing::Size(61, 17);
 			this->radioButtonSmooth->TabIndex = 7;
@@ -135,7 +139,7 @@ namespace WindowsFormApplication1 {
 			// radioButtonNoSmooth
 			// 
 			this->radioButtonNoSmooth->AutoSize = true;
-			this->radioButtonNoSmooth->Location = System::Drawing::Point(658, 139);
+			this->radioButtonNoSmooth->Location = System::Drawing::Point(657, 212);
 			this->radioButtonNoSmooth->Name = L"radioButtonNoSmooth";
 			this->radioButtonNoSmooth->Size = System::Drawing::Size(62, 17);
 			this->radioButtonNoSmooth->TabIndex = 8;
@@ -143,11 +147,22 @@ namespace WindowsFormApplication1 {
 			this->radioButtonNoSmooth->Text = L"Without";
 			this->radioButtonNoSmooth->UseVisualStyleBackColor = true;
 			// 
+			// textBoxPixelSize
+			// 
+			this->textBoxPixelSize->CharacterCasing = System::Windows::Forms::CharacterCasing::Upper;
+			this->textBoxPixelSize->Location = System::Drawing::Point(658, 38);
+			this->textBoxPixelSize->Name = L"textBoxPixelSize";
+			this->textBoxPixelSize->Size = System::Drawing::Size(75, 20);
+			this->textBoxPixelSize->TabIndex = 9;
+			this->textBoxPixelSize->Text = L"5";
+			this->textBoxPixelSize->TextChanged += gcnew System::EventHandler(this, &Form1::textBox1_TextChanged);
+			// 
 			// Form1
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(740, 672);
+			this->Controls->Add(this->textBoxPixelSize);
 			this->Controls->Add(this->radioButtonNoSmooth);
 			this->Controls->Add(this->radioButtonSmooth);
 			this->Controls->Add(this->radioButtonColor);
@@ -191,17 +206,18 @@ namespace WindowsFormApplication1 {
 #pragma endregion
 	private: System::Void Form1_Load(System::Object^  sender, System::EventArgs^  e) {
 		System::Int16 number = (int)Parsestring(textBoxResolution->Text);
-		noisetable at(number, radioButtonColor->Checked);
-		System::Threading::Thread::Sleep(500);
+		System::Int16 pixelsize = (int)Parsestring(textBoxPixelSize->Text);
+		noisetable at(number, radioButtonColor->Checked, pixelsize);
 		system("convert temp.ppm temp.png");
-		System::Threading::Thread::Sleep(500);
 		pictureBox->LoadAsync("temp.png");
 		//pictureBox->Image=Image::FromFile("temp.png");
 	}
 	private: System::Void buttonRefresh_Click(System::Object^  sender, System::EventArgs^  e) {
 
 	}
-	};
+	private: System::Void textBox1_TextChanged(System::Object^  sender, System::EventArgs^  e) {
+	}
+};
 
 
 }
