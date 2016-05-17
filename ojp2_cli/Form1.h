@@ -82,6 +82,7 @@ namespace WindowsFormApplication1 {
 			// 
 			// buttonRefresh
 			// 
+			this->buttonRefresh->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Right));
 			this->buttonRefresh->Location = System::Drawing::Point(658, 159);
 			this->buttonRefresh->Name = L"buttonRefresh";
 			this->buttonRefresh->Size = System::Drawing::Size(75, 23);
@@ -92,7 +93,9 @@ namespace WindowsFormApplication1 {
 			// 
 			// pictureBox
 			// 
-			this->pictureBox->Location = System::Drawing::Point(12, 12);
+			this->pictureBox->Dock = System::Windows::Forms::DockStyle::Left;
+			this->pictureBox->Location = System::Drawing::Point(0, 0);
+			this->pictureBox->Margin = System::Windows::Forms::Padding(0);
 			this->pictureBox->Name = L"pictureBox";
 			this->pictureBox->Size = System::Drawing::Size(640, 640);
 			this->pictureBox->SizeMode = System::Windows::Forms::PictureBoxSizeMode::CenterImage;
@@ -101,6 +104,7 @@ namespace WindowsFormApplication1 {
 			// 
 			// textBoxResolution
 			// 
+			this->textBoxResolution->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Right));
 			this->textBoxResolution->Location = System::Drawing::Point(657, 25);
 			this->textBoxResolution->Name = L"textBoxResolution";
 			this->textBoxResolution->Size = System::Drawing::Size(75, 20);
@@ -109,6 +113,7 @@ namespace WindowsFormApplication1 {
 			// 
 			// radioButtonMono
 			// 
+			this->radioButtonMono->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Right));
 			this->radioButtonMono->AutoSize = true;
 			this->radioButtonMono->Checked = true;
 			this->radioButtonMono->Location = System::Drawing::Point(658, 112);
@@ -121,6 +126,7 @@ namespace WindowsFormApplication1 {
 			// 
 			// radioButtonColor
 			// 
+			this->radioButtonColor->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Right));
 			this->radioButtonColor->AutoSize = true;
 			this->radioButtonColor->Location = System::Drawing::Point(658, 136);
 			this->radioButtonColor->Name = L"radioButtonColor";
@@ -132,6 +138,7 @@ namespace WindowsFormApplication1 {
 			// 
 			// textBoxPixelSize
 			// 
+			this->textBoxPixelSize->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Right));
 			this->textBoxPixelSize->CharacterCasing = System::Windows::Forms::CharacterCasing::Upper;
 			this->textBoxPixelSize->Location = System::Drawing::Point(657, 63);
 			this->textBoxPixelSize->Name = L"textBoxPixelSize";
@@ -142,6 +149,7 @@ namespace WindowsFormApplication1 {
 			// 
 			// label1
 			// 
+			this->label1->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Right));
 			this->label1->AutoSize = true;
 			this->label1->Location = System::Drawing::Point(658, 6);
 			this->label1->Name = L"label1";
@@ -152,6 +160,7 @@ namespace WindowsFormApplication1 {
 			// 
 			// label2
 			// 
+			this->label2->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Right));
 			this->label2->AutoSize = true;
 			this->label2->Location = System::Drawing::Point(658, 47);
 			this->label2->Name = L"label2";
@@ -161,6 +170,7 @@ namespace WindowsFormApplication1 {
 			// 
 			// checkBoxAutostretch
 			// 
+			this->checkBoxAutostretch->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Right));
 			this->checkBoxAutostretch->AutoSize = true;
 			this->checkBoxAutostretch->Location = System::Drawing::Point(659, 189);
 			this->checkBoxAutostretch->Name = L"checkBoxAutostretch";
@@ -174,7 +184,9 @@ namespace WindowsFormApplication1 {
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(740, 672);
+			this->AutoSize = true;
+			this->AutoSizeMode = System::Windows::Forms::AutoSizeMode::GrowAndShrink;
+			this->ClientSize = System::Drawing::Size(740, 640);
 			this->Controls->Add(this->checkBoxAutostretch);
 			this->Controls->Add(this->label2);
 			this->Controls->Add(this->label1);
@@ -185,8 +197,9 @@ namespace WindowsFormApplication1 {
 			this->Controls->Add(this->pictureBox);
 			this->Controls->Add(this->buttonRefresh);
 			this->Name = L"Form1";
-			this->Text = L"Form1";
+			this->Text = L"Noise generator";
 			this->Load += gcnew System::EventHandler(this, &Form1::Form1_Load);
+			this->Resize += gcnew System::EventHandler(this, &Form1::Form1_Resize);
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox))->EndInit();
 			this->ResumeLayout(false);
 			this->PerformLayout();
@@ -251,9 +264,12 @@ private: System::Void radioButtonNoSmooth_CheckedChanged(System::Object^  sender
 }
 private: System::Void checkBoxAutostretch_CheckedChanged(System::Object^  sender, System::EventArgs^  e) {
 	if (checkBoxAutostretch->Checked)
-		pictureBox->SizeMode = PictureBoxSizeMode::StretchImage;
+		pictureBox->SizeMode = PictureBoxSizeMode::Zoom;
 	else
 		pictureBox->SizeMode = PictureBoxSizeMode::CenterImage;
+}
+private: System::Void Form1_Resize(System::Object^  sender, System::EventArgs^  e) {
+	pictureBox->Size.Width = pictureBox->Size.Height;
 }
 };
 
