@@ -219,8 +219,22 @@ namespace WindowsFormApplication1 {
 		}
 #pragma endregion
 	private: System::Void Form1_Load(System::Object^  sender, System::EventArgs^  e) {
+		
 		System::Int16 number = (int)Parsestring(textBoxResolution->Text);
 		System::Int16 pixelsize = (int)Parsestring(textBoxPixelSize->Text);
+
+		if(number*pixelsize>900 && !radioButtonColor->Checked)
+			MessageBox::Show("Creating noise can take some time,please be patient. \nPixel size also increases generating time.",
+				"Important Note",
+				MessageBoxButtons::OK,
+				MessageBoxIcon::Exclamation);
+		if (number*pixelsize > 300 && radioButtonColor->Checked) {
+			MessageBox::Show("Creating noise can take some time,please be patient.\nGenerating color noise is 3 times slower, try using monochrome mode.",
+				"Important Note",
+				MessageBoxButtons::OK,
+				MessageBoxIcon::Exclamation);
+		}
+
 		noisetable at(number, radioButtonColor->Checked, pixelsize);
 		system("convert temp.ppm temp.png");
 		pictureBox->LoadAsync("temp.png");

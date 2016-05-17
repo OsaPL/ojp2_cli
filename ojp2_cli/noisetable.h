@@ -42,11 +42,14 @@ public:
 					for (auto j = 0; j < pixelsize; j++) {
 						if (color) {
 							file << (int)table[i*size + k] << " ";
+							file << (int)table[i*size + k+1] << " ";
+							file << (int)table[i*size + k+2] << " ";
 						}
 						else
 							file << (int)table[i*size+k] << " ";
-						
 					}
+					if (color)
+						k += 2;
 				}
 				file << std::endl;
 			}
