@@ -42,9 +42,12 @@ namespace WindowsFormApplication1 {
 	private: System::Windows::Forms::TextBox^  textBoxResolution;
 	private: System::Windows::Forms::RadioButton^  radioButtonMono;
 	private: System::Windows::Forms::RadioButton^  radioButtonColor;
-	private: System::Windows::Forms::RadioButton^  radioButtonSmooth;
-	private: System::Windows::Forms::RadioButton^  radioButtonNoSmooth;
+
+
 	private: System::Windows::Forms::TextBox^  textBoxPixelSize;
+	private: System::Windows::Forms::Label^  label1;
+	private: System::Windows::Forms::Label^  label2;
+	private: System::Windows::Forms::CheckBox^  checkBoxAutostretch;
 
 
 
@@ -70,9 +73,10 @@ namespace WindowsFormApplication1 {
 			this->textBoxResolution = (gcnew System::Windows::Forms::TextBox());
 			this->radioButtonMono = (gcnew System::Windows::Forms::RadioButton());
 			this->radioButtonColor = (gcnew System::Windows::Forms::RadioButton());
-			this->radioButtonSmooth = (gcnew System::Windows::Forms::RadioButton());
-			this->radioButtonNoSmooth = (gcnew System::Windows::Forms::RadioButton());
 			this->textBoxPixelSize = (gcnew System::Windows::Forms::TextBox());
+			this->label1 = (gcnew System::Windows::Forms::Label());
+			this->label2 = (gcnew System::Windows::Forms::Label());
+			this->checkBoxAutostretch = (gcnew System::Windows::Forms::CheckBox());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox))->BeginInit();
 			this->SuspendLayout();
 			// 
@@ -91,12 +95,13 @@ namespace WindowsFormApplication1 {
 			this->pictureBox->Location = System::Drawing::Point(12, 12);
 			this->pictureBox->Name = L"pictureBox";
 			this->pictureBox->Size = System::Drawing::Size(640, 640);
+			this->pictureBox->SizeMode = System::Windows::Forms::PictureBoxSizeMode::CenterImage;
 			this->pictureBox->TabIndex = 1;
 			this->pictureBox->TabStop = false;
 			// 
 			// textBoxResolution
 			// 
-			this->textBoxResolution->Location = System::Drawing::Point(658, 12);
+			this->textBoxResolution->Location = System::Drawing::Point(657, 25);
 			this->textBoxResolution->Name = L"textBoxResolution";
 			this->textBoxResolution->Size = System::Drawing::Size(75, 20);
 			this->textBoxResolution->TabIndex = 4;
@@ -125,46 +130,55 @@ namespace WindowsFormApplication1 {
 			this->radioButtonColor->Text = L"Color";
 			this->radioButtonColor->UseVisualStyleBackColor = true;
 			// 
-			// radioButtonSmooth
-			// 
-			this->radioButtonSmooth->AutoSize = true;
-			this->radioButtonSmooth->Location = System::Drawing::Point(657, 235);
-			this->radioButtonSmooth->Name = L"radioButtonSmooth";
-			this->radioButtonSmooth->Size = System::Drawing::Size(61, 17);
-			this->radioButtonSmooth->TabIndex = 7;
-			this->radioButtonSmooth->TabStop = true;
-			this->radioButtonSmooth->Text = L"Smooth";
-			this->radioButtonSmooth->UseVisualStyleBackColor = true;
-			// 
-			// radioButtonNoSmooth
-			// 
-			this->radioButtonNoSmooth->AutoSize = true;
-			this->radioButtonNoSmooth->Location = System::Drawing::Point(657, 212);
-			this->radioButtonNoSmooth->Name = L"radioButtonNoSmooth";
-			this->radioButtonNoSmooth->Size = System::Drawing::Size(62, 17);
-			this->radioButtonNoSmooth->TabIndex = 8;
-			this->radioButtonNoSmooth->TabStop = true;
-			this->radioButtonNoSmooth->Text = L"Without";
-			this->radioButtonNoSmooth->UseVisualStyleBackColor = true;
-			// 
 			// textBoxPixelSize
 			// 
 			this->textBoxPixelSize->CharacterCasing = System::Windows::Forms::CharacterCasing::Upper;
-			this->textBoxPixelSize->Location = System::Drawing::Point(658, 38);
+			this->textBoxPixelSize->Location = System::Drawing::Point(657, 63);
 			this->textBoxPixelSize->Name = L"textBoxPixelSize";
 			this->textBoxPixelSize->Size = System::Drawing::Size(75, 20);
 			this->textBoxPixelSize->TabIndex = 9;
 			this->textBoxPixelSize->Text = L"5";
 			this->textBoxPixelSize->TextChanged += gcnew System::EventHandler(this, &Form1::textBox1_TextChanged);
 			// 
+			// label1
+			// 
+			this->label1->AutoSize = true;
+			this->label1->Location = System::Drawing::Point(658, 6);
+			this->label1->Name = L"label1";
+			this->label1->Size = System::Drawing::Size(57, 13);
+			this->label1->TabIndex = 10;
+			this->label1->Text = L"Resolution";
+			this->label1->Click += gcnew System::EventHandler(this, &Form1::label1_Click);
+			// 
+			// label2
+			// 
+			this->label2->AutoSize = true;
+			this->label2->Location = System::Drawing::Point(658, 47);
+			this->label2->Name = L"label2";
+			this->label2->Size = System::Drawing::Size(49, 13);
+			this->label2->TabIndex = 11;
+			this->label2->Text = L"PixelSize";
+			// 
+			// checkBoxAutostretch
+			// 
+			this->checkBoxAutostretch->AutoSize = true;
+			this->checkBoxAutostretch->Location = System::Drawing::Point(659, 189);
+			this->checkBoxAutostretch->Name = L"checkBoxAutostretch";
+			this->checkBoxAutostretch->Size = System::Drawing::Size(80, 17);
+			this->checkBoxAutostretch->TabIndex = 12;
+			this->checkBoxAutostretch->Text = L"Autostretch";
+			this->checkBoxAutostretch->UseVisualStyleBackColor = true;
+			this->checkBoxAutostretch->CheckedChanged += gcnew System::EventHandler(this, &Form1::checkBoxAutostretch_CheckedChanged);
+			// 
 			// Form1
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(740, 672);
+			this->Controls->Add(this->checkBoxAutostretch);
+			this->Controls->Add(this->label2);
+			this->Controls->Add(this->label1);
 			this->Controls->Add(this->textBoxPixelSize);
-			this->Controls->Add(this->radioButtonNoSmooth);
-			this->Controls->Add(this->radioButtonSmooth);
 			this->Controls->Add(this->radioButtonColor);
 			this->Controls->Add(this->radioButtonMono);
 			this->Controls->Add(this->textBoxResolution);
@@ -217,6 +231,16 @@ namespace WindowsFormApplication1 {
 	}
 	private: System::Void textBox1_TextChanged(System::Object^  sender, System::EventArgs^  e) {
 	}
+private: System::Void label1_Click(System::Object^  sender, System::EventArgs^  e) {
+}
+private: System::Void radioButtonNoSmooth_CheckedChanged(System::Object^  sender, System::EventArgs^  e) {
+}
+private: System::Void checkBoxAutostretch_CheckedChanged(System::Object^  sender, System::EventArgs^  e) {
+	if (checkBoxAutostretch->Checked)
+		pictureBox->SizeMode = PictureBoxSizeMode::StretchImage;
+	else
+		pictureBox->SizeMode = PictureBoxSizeMode::CenterImage;
+}
 };
 
 

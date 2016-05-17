@@ -22,7 +22,7 @@ public:
 		std::default_random_engine e1(r());
 		std::uniform_real_distribution <double> dist(0, 256);
 		table = (double*)calloc(size*sizemult, sizeof(double));
-		for (auto j = 0; j < size*sizemult; j++) {
+		for (auto j = 0; j < size*sizemult	; j++) {
 			table[j] = dist(e1);
 			//table[j] = rand() % 256;
 		}
@@ -38,21 +38,27 @@ public:
 
 		for (auto i = 0; i < size; i++) {
 			for (auto h = 0; h < pixelsize; h++) {
-				for (auto k = 0; k < size*sizemult; k++) {
+				for (auto k = 0; k < sizemult; k++) {
 					for (auto j = 0; j < pixelsize; j++) {
-						file << table[i*size+k] << " ";
+						if (color) {
+							file << (int)table[i*size + k] << " ";
+						}
+						else
+							file << (int)table[i*size+k] << " ";
+						
 					}
 				}
 				file << std::endl;
 			}
 		}
 
+		//for (auto j = 0; j < sizemult; j++) {
+		//		file << table[j] << " ";
+		//}
 
 		file.close();
 	}
-	//for (auto j = 0; j < sizemult; j++) {
-	//		file << table[j] << " ";
-	//}
+
 	double getval(int x) {
 		return table[x];
 	}
@@ -61,14 +67,6 @@ public:
 	}
 	~noisetable() {
 		delete[] table;
-	}
-
-	COLORREF hue(int nr) {
-		return RGB(table[nr], table[nr], table[nr]);
-	}
-	COLORREF huelin(double x, double y) {
-		double temp = linear(x);
-		return RGB(temp, temp, temp);
 	}
 
 	double linear(double x) {
@@ -93,7 +91,4 @@ public:
 		return (yl + ((yh - yl) / (xh - yh))*(x - xl));
 	}
 
-	void createimage() {
-
-	}
 };
