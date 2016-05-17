@@ -93,11 +93,14 @@ namespace WindowsFormApplication1 {
 			// 
 			// pictureBox
 			// 
-			this->pictureBox->Dock = System::Windows::Forms::DockStyle::Left;
-			this->pictureBox->Location = System::Drawing::Point(0, 0);
+			this->pictureBox->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
+				| System::Windows::Forms::AnchorStyles::Left)
+				| System::Windows::Forms::AnchorStyles::Right));
+			this->pictureBox->BackColor = System::Drawing::SystemColors::ScrollBar;
+			this->pictureBox->Location = System::Drawing::Point(-1, -1);
 			this->pictureBox->Margin = System::Windows::Forms::Padding(0);
 			this->pictureBox->Name = L"pictureBox";
-			this->pictureBox->Size = System::Drawing::Size(640, 640);
+			this->pictureBox->Size = System::Drawing::Size(640, 639);
 			this->pictureBox->SizeMode = System::Windows::Forms::PictureBoxSizeMode::CenterImage;
 			this->pictureBox->TabIndex = 1;
 			this->pictureBox->TabStop = false;
