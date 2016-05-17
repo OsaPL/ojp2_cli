@@ -15,7 +15,7 @@ protected:
 public:
 	noisetable(int xy, bool clr,int pixels) : size(xy), color(clr), pixelsize(pixels)
 	{
-		int sizemult = size;
+		int sizemult = size;	
 		if (color)
 			sizemult *= 3;
 			

@@ -1,5 +1,6 @@
 #pragma once
 #include "noisetable.h"
+#include "renderer.h"
 
 namespace WindowsFormApplication1 {
 
@@ -48,6 +49,7 @@ namespace WindowsFormApplication1 {
 	private: System::Windows::Forms::Label^  label1;
 	private: System::Windows::Forms::Label^  label2;
 	private: System::Windows::Forms::CheckBox^  checkBoxAutostretch;
+	private: System::Windows::Forms::Button^  buttonDetach;
 
 
 
@@ -77,6 +79,7 @@ namespace WindowsFormApplication1 {
 			this->label1 = (gcnew System::Windows::Forms::Label());
 			this->label2 = (gcnew System::Windows::Forms::Label());
 			this->checkBoxAutostretch = (gcnew System::Windows::Forms::CheckBox());
+			this->buttonDetach = (gcnew System::Windows::Forms::Button());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox))->BeginInit();
 			this->SuspendLayout();
 			// 
@@ -183,6 +186,18 @@ namespace WindowsFormApplication1 {
 			this->checkBoxAutostretch->UseVisualStyleBackColor = true;
 			this->checkBoxAutostretch->CheckedChanged += gcnew System::EventHandler(this, &Form1::checkBoxAutostretch_CheckedChanged);
 			// 
+			// buttonDetach
+			// 
+			this->buttonDetach->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Right));
+			this->buttonDetach->AutoSize = true;
+			this->buttonDetach->Location = System::Drawing::Point(657, 213);
+			this->buttonDetach->Name = L"buttonDetach";
+			this->buttonDetach->Size = System::Drawing::Size(75, 23);
+			this->buttonDetach->TabIndex = 13;
+			this->buttonDetach->Text = L"Detach";
+			this->buttonDetach->UseVisualStyleBackColor = true;
+			this->buttonDetach->Click += gcnew System::EventHandler(this, &Form1::buttonDetach_Click);
+			// 
 			// Form1
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
@@ -190,6 +205,7 @@ namespace WindowsFormApplication1 {
 			this->AutoSize = true;
 			this->AutoSizeMode = System::Windows::Forms::AutoSizeMode::GrowAndShrink;
 			this->ClientSize = System::Drawing::Size(740, 640);
+			this->Controls->Add(this->buttonDetach);
 			this->Controls->Add(this->checkBoxAutostretch);
 			this->Controls->Add(this->label2);
 			this->Controls->Add(this->label1);
@@ -257,7 +273,6 @@ namespace WindowsFormApplication1 {
 		//pictureBox->Image=Image::FromFile("temp.png");
 	}
 	private: System::Void buttonRefresh_Click(System::Object^  sender, System::EventArgs^  e) {
-
 	}
 	private: System::Void textBox1_TextChanged(System::Object^  sender, System::EventArgs^  e) {
 	}
@@ -273,6 +288,11 @@ private: System::Void checkBoxAutostretch_CheckedChanged(System::Object^  sender
 }
 private: System::Void Form1_Resize(System::Object^  sender, System::EventArgs^  e) {
 	pictureBox->Size.Width = pictureBox->Size.Height;
+}
+private: System::Void buttonDetach_Click(System::Object^  sender, System::EventArgs^  e) {
+	Form2 ^ frm11 = gcnew Form2(this);
+	frm11->Show();
+	//this->Hide();
 }
 };
 
