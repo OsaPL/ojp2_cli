@@ -39,7 +39,7 @@ namespace WindowsFormApplication1 {
 	private: System::ComponentModel::BackgroundWorker^  backgroundWorker1;
 	protected:
 	private: System::Windows::Forms::Button^  buttonRefresh;
-	private: System::Windows::Forms::PictureBox^  pictureBox;
+	public: System::Windows::Forms::PictureBox^  pictureBox;
 	private: System::Windows::Forms::TextBox^  textBoxResolution;
 	private: System::Windows::Forms::RadioButton^  radioButtonMono;
 	private: System::Windows::Forms::RadioButton^  radioButtonColor;
@@ -217,7 +217,11 @@ namespace WindowsFormApplication1 {
 			this->Controls->Add(this->buttonRefresh);
 			this->Name = L"Form1";
 			this->Text = L"Noise generator";
+			this->Activated += gcnew System::EventHandler(this, &Form1::Form1_Enter);
+			this->Deactivate += gcnew System::EventHandler(this, &Form1::Form1_Enter);
 			this->Load += gcnew System::EventHandler(this, &Form1::Form1_Load);
+			this->Enter += gcnew System::EventHandler(this, &Form1::Form1_Enter);
+			this->Leave += gcnew System::EventHandler(this, &Form1::Form1_Enter);
 			this->Resize += gcnew System::EventHandler(this, &Form1::Form1_Resize);
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox))->EndInit();
 			this->ResumeLayout(false);
@@ -292,7 +296,15 @@ private: System::Void Form1_Resize(System::Object^  sender, System::EventArgs^  
 private: System::Void buttonDetach_Click(System::Object^  sender, System::EventArgs^  e) {
 	Form2 ^ frm11 = gcnew Form2(this);
 	frm11->Show();
+	detach = true;
+	//
 	//this->Hide();
+}
+private: System::Void Form1_Enter(System::Object^  sender, System::EventArgs^  e) {
+	if (detach)
+		pictureBox->Show();
+	else
+		pictureBox->Hide();
 }
 };
 

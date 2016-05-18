@@ -1,4 +1,6 @@
-
+#include <fstream>
+#pragma once
+bool detach = true;
 using namespace System;
 using namespace System::ComponentModel;
 using namespace System::Collections;
@@ -37,7 +39,10 @@ using namespace System::Drawing;
 				delete components;
 			}
 		}
-	private: System::Windows::Forms::Button^  button1;
+	private: System::Windows::Forms::Button^  button1Merge;
+	private: System::Windows::Forms::PictureBox^  pictureBoxDetach;
+	protected:
+
 	protected:
 
 	private:
@@ -53,40 +58,70 @@ using namespace System::Drawing;
 		/// </summary>
 		void InitializeComponent(void)
 		{
-			this->button1 = (gcnew System::Windows::Forms::Button());
+			this->button1Merge = (gcnew System::Windows::Forms::Button());
+			this->pictureBoxDetach = (gcnew System::Windows::Forms::PictureBox());
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBoxDetach))->BeginInit();
 			this->SuspendLayout();
 			// 
-			// button1
+			// button1Merge
 			// 
-			this->button1->Location = System::Drawing::Point(147, 132);
-			this->button1->Name = L"button1";
-			this->button1->Size = System::Drawing::Size(102, 38);
-			this->button1->TabIndex = 0;
-			this->button1->Text = L"Merge";
-			this->button1->UseVisualStyleBackColor = true;
-			this->button1->Click += gcnew System::EventHandler(this, &Form2::button1_Click);
+			this->button1Merge->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Right));
+			this->button1Merge->Location = System::Drawing::Point(336, 12);
+			this->button1Merge->Name = L"button1Merge";
+			this->button1Merge->Size = System::Drawing::Size(64, 27);
+			this->button1Merge->TabIndex = 0;
+			this->button1Merge->Text = L"Merge";
+			this->button1Merge->UseVisualStyleBackColor = true;
+			this->button1Merge->Click += gcnew System::EventHandler(this, &Form2::button1_Click);
+			// 
+			// pictureBoxDetach
+			// 
+			this->pictureBoxDetach->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
+				| System::Windows::Forms::AnchorStyles::Left)
+				| System::Windows::Forms::AnchorStyles::Right));
+			this->pictureBoxDetach->BackColor = System::Drawing::SystemColors::ScrollBar;
+			this->pictureBoxDetach->Location = System::Drawing::Point(0, 0);
+			this->pictureBoxDetach->Name = L"pictureBoxDetach";
+			this->pictureBoxDetach->Size = System::Drawing::Size(330, 330);
+			this->pictureBoxDetach->SizeMode = System::Windows::Forms::PictureBoxSizeMode::CenterImage;
+			this->pictureBoxDetach->TabIndex = 1;
+			this->pictureBoxDetach->TabStop = false;
 			// 
 			// Form2
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(412, 295);
-			this->Controls->Add(this->button1);
-			this->Name = L"Noise image";
-			this->Text = L"Noise image";
+			this->AutoSize = true;
+			this->AutoSizeMode = System::Windows::Forms::AutoSizeMode::GrowAndShrink;
+			this->ClientSize = System::Drawing::Size(407, 330);
+			this->ControlBox = false;
+			this->Controls->Add(this->pictureBoxDetach);
+			this->Controls->Add(this->button1Merge);
+			this->Name = L"Form2";
+			this->Text = L"Renderer";
 			this->Load += gcnew System::EventHandler(this, &Form2::Form2_Load);
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBoxDetach))->EndInit();
 			this->ResumeLayout(false);
 
 		}
 #pragma endregion
 	private: System::Void Form2_Load(System::Object^  sender, System::EventArgs^  e) {
+		std::ifstream ifs("temp.png");
+		if (ifs.is_open()) {
+			pictureBoxDetach->LoadAsync("temp.png");
+		}
 	}
 	private: System::Void button1_Click(System::Object^  sender, System::EventArgs^  e) {
 		this->Hide();
+		detach = false;
 		//otherform->Show();
+
 	}
 	};
 
 
 
 
+
+
+	////////////////////////
