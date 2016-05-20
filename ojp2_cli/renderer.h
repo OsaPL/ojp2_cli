@@ -1,6 +1,6 @@
 #include <fstream>
 #pragma once
-bool detach = true;
+
 using namespace System;
 using namespace System::ComponentModel;
 using namespace System::Collections;
@@ -17,10 +17,15 @@ using namespace System::Drawing;
 
 
 	private: System::Windows::Forms::Form ^ otherform;
+	private: System::Windows::Forms::PictureBox ^ pictureBox;
+
+	private: System::Windows::Forms::CheckBox ^ checkBoxAutostretch;
 	public:
-		Form2(System::Windows::Forms::Form ^ o)
+		Form2(System::Windows::Forms::Form ^ o, System::Windows::Forms::PictureBox ^ p, System::Windows::Forms::CheckBox ^ c)
 		{
 			otherform = o;
+			pictureBox = p;
+			checkBoxAutostretch = c;
 			InitializeComponent();
 
 			//
@@ -39,8 +44,9 @@ using namespace System::Drawing;
 				delete components;
 			}
 		}
-	private: System::Windows::Forms::Button^  button1Merge;
+
 	private: System::Windows::Forms::PictureBox^  pictureBoxDetach;
+	private: System::ComponentModel::IContainer^  components;
 	protected:
 
 	protected:
@@ -49,7 +55,7 @@ using namespace System::Drawing;
 		/// <summary>
 		/// Required designer variable.
 		/// </summary>
-		System::ComponentModel::Container ^components;
+
 
 #pragma region Windows Form Designer generated code
 		/// <summary>
@@ -58,21 +64,9 @@ using namespace System::Drawing;
 		/// </summary>
 		void InitializeComponent(void)
 		{
-			this->button1Merge = (gcnew System::Windows::Forms::Button());
 			this->pictureBoxDetach = (gcnew System::Windows::Forms::PictureBox());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBoxDetach))->BeginInit();
 			this->SuspendLayout();
-			// 
-			// button1Merge
-			// 
-			this->button1Merge->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Right));
-			this->button1Merge->Location = System::Drawing::Point(336, 12);
-			this->button1Merge->Name = L"button1Merge";
-			this->button1Merge->Size = System::Drawing::Size(64, 27);
-			this->button1Merge->TabIndex = 0;
-			this->button1Merge->Text = L"Merge";
-			this->button1Merge->UseVisualStyleBackColor = true;
-			this->button1Merge->Click += gcnew System::EventHandler(this, &Form2::button1_Click);
 			// 
 			// pictureBoxDetach
 			// 
@@ -82,7 +76,7 @@ using namespace System::Drawing;
 			this->pictureBoxDetach->BackColor = System::Drawing::SystemColors::ScrollBar;
 			this->pictureBoxDetach->Location = System::Drawing::Point(0, 0);
 			this->pictureBoxDetach->Name = L"pictureBoxDetach";
-			this->pictureBoxDetach->Size = System::Drawing::Size(330, 330);
+			this->pictureBoxDetach->Size = System::Drawing::Size(344, 330);
 			this->pictureBoxDetach->SizeMode = System::Windows::Forms::PictureBoxSizeMode::CenterImage;
 			this->pictureBoxDetach->TabIndex = 1;
 			this->pictureBoxDetach->TabStop = false;
@@ -93,13 +87,14 @@ using namespace System::Drawing;
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->AutoSize = true;
 			this->AutoSizeMode = System::Windows::Forms::AutoSizeMode::GrowAndShrink;
-			this->ClientSize = System::Drawing::Size(407, 330);
-			this->ControlBox = false;
+			this->ClientSize = System::Drawing::Size(344, 330);
 			this->Controls->Add(this->pictureBoxDetach);
-			this->Controls->Add(this->button1Merge);
 			this->Name = L"Form2";
 			this->Text = L"Renderer";
+			this->Activated += gcnew System::EventHandler(this, &Form2::Form2_Activated);
+			this->FormClosed += gcnew System::Windows::Forms::FormClosedEventHandler(this, &Form2::Form2_FormClosed);
 			this->Load += gcnew System::EventHandler(this, &Form2::Form2_Load);
+			this->Validated += gcnew System::EventHandler(this, &Form2::Form2_Activated);
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBoxDetach))->EndInit();
 			this->ResumeLayout(false);
 
@@ -110,14 +105,21 @@ using namespace System::Drawing;
 		if (ifs.is_open()) {
 			pictureBoxDetach->LoadAsync("temp.png");
 		}
-	}
-	private: System::Void button1_Click(System::Object^  sender, System::EventArgs^  e) {
-		this->Hide();
-		detach = false;
-		//otherform->Show();
 
 	}
-	};
+private: System::Void Form2_Activated(System::Object^  sender, System::EventArgs^  e) {
+	pictureBoxDetach->LoadAsync("temp.png");
+	if (checkBoxAutostretch->Checked)
+		pictureBoxDetach->SizeMode = PictureBoxSizeMode::Zoom;
+	else
+		pictureBoxDetach->SizeMode = PictureBoxSizeMode::CenterImage;
+}
+private: System::Void Form2_FormClosed(System::Object^  sender, System::Windows::Forms::FormClosedEventArgs^  e) {
+	this->Hide();
+	otherform->Size.Width = 756;
+	pictureBox->Show();
+}
+};
 
 
 

@@ -1,3 +1,4 @@
+bool detach = true;
 #pragma once
 #include "noisetable.h"
 #include "renderer.h"
@@ -23,6 +24,7 @@ namespace WindowsFormApplication1 {
 			//
 			//TODO: Add the constructor code here
 			//
+
 		}
 
 	protected:
@@ -151,7 +153,6 @@ namespace WindowsFormApplication1 {
 			this->textBoxPixelSize->Size = System::Drawing::Size(75, 20);
 			this->textBoxPixelSize->TabIndex = 9;
 			this->textBoxPixelSize->Text = L"5";
-			this->textBoxPixelSize->TextChanged += gcnew System::EventHandler(this, &Form1::textBox1_TextChanged);
 			// 
 			// label1
 			// 
@@ -162,7 +163,6 @@ namespace WindowsFormApplication1 {
 			this->label1->Size = System::Drawing::Size(57, 13);
 			this->label1->TabIndex = 10;
 			this->label1->Text = L"Resolution";
-			this->label1->Click += gcnew System::EventHandler(this, &Form1::label1_Click);
 			// 
 			// label2
 			// 
@@ -217,11 +217,7 @@ namespace WindowsFormApplication1 {
 			this->Controls->Add(this->buttonRefresh);
 			this->Name = L"Form1";
 			this->Text = L"Noise generator";
-			this->Activated += gcnew System::EventHandler(this, &Form1::Form1_Enter);
-			this->Deactivate += gcnew System::EventHandler(this, &Form1::Form1_Enter);
 			this->Load += gcnew System::EventHandler(this, &Form1::Form1_Load);
-			this->Enter += gcnew System::EventHandler(this, &Form1::Form1_Enter);
-			this->Leave += gcnew System::EventHandler(this, &Form1::Form1_Enter);
 			this->Resize += gcnew System::EventHandler(this, &Form1::Form1_Resize);
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox))->EndInit();
 			this->ResumeLayout(false);
@@ -229,7 +225,7 @@ namespace WindowsFormApplication1 {
 
 		}
 
-		double Parsestring(String^ string) {
+		private:double Parsestring(String^ string) {
 			System::Int16 number;
 
 			if (string != "") {
@@ -276,14 +272,6 @@ namespace WindowsFormApplication1 {
 		pictureBox->LoadAsync("temp.png");
 		//pictureBox->Image=Image::FromFile("temp.png");
 	}
-	private: System::Void buttonRefresh_Click(System::Object^  sender, System::EventArgs^  e) {
-	}
-	private: System::Void textBox1_TextChanged(System::Object^  sender, System::EventArgs^  e) {
-	}
-private: System::Void label1_Click(System::Object^  sender, System::EventArgs^  e) {
-}
-private: System::Void radioButtonNoSmooth_CheckedChanged(System::Object^  sender, System::EventArgs^  e) {
-}
 private: System::Void checkBoxAutostretch_CheckedChanged(System::Object^  sender, System::EventArgs^  e) {
 	if (checkBoxAutostretch->Checked)
 		pictureBox->SizeMode = PictureBoxSizeMode::Zoom;
@@ -294,17 +282,13 @@ private: System::Void Form1_Resize(System::Object^  sender, System::EventArgs^  
 	pictureBox->Size.Width = pictureBox->Size.Height;
 }
 private: System::Void buttonDetach_Click(System::Object^  sender, System::EventArgs^  e) {
-	Form2 ^ frm11 = gcnew Form2(this);
+	this->Size.Width = 105;
+	this->Size.Height = 205;
+	Form2 ^ frm11 = gcnew Form2(this,pictureBox, checkBoxAutostretch);
 	frm11->Show();
-	detach = true;
+	pictureBox->Hide();
 	//
 	//this->Hide();
-}
-private: System::Void Form1_Enter(System::Object^  sender, System::EventArgs^  e) {
-	if (detach)
-		pictureBox->Show();
-	else
-		pictureBox->Hide();
 }
 };
 
