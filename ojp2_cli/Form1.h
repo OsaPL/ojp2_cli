@@ -1,4 +1,4 @@
-bool detach = true;
+bool detach = false;
 #pragma once
 #include "noisetable.h"
 #include "renderer.h"
@@ -90,7 +90,7 @@ namespace WindowsFormApplication1 {
 			// 
 			// buttonRefresh
 			// 
-			this->buttonRefresh->Location = System::Drawing::Point(13, 162);
+			this->buttonRefresh->Location = System::Drawing::Point(12, 132);
 			this->buttonRefresh->Name = L"buttonRefresh";
 			this->buttonRefresh->Size = System::Drawing::Size(75, 23);
 			this->buttonRefresh->TabIndex = 0;
@@ -114,7 +114,7 @@ namespace WindowsFormApplication1 {
 			// 
 			// textBoxResolution
 			// 
-			this->textBoxResolution->Location = System::Drawing::Point(12, 28);
+			this->textBoxResolution->Location = System::Drawing::Point(12, 21);
 			this->textBoxResolution->Name = L"textBoxResolution";
 			this->textBoxResolution->Size = System::Drawing::Size(75, 20);
 			this->textBoxResolution->TabIndex = 4;
@@ -124,7 +124,7 @@ namespace WindowsFormApplication1 {
 			// 
 			this->radioButtonMono->AutoSize = true;
 			this->radioButtonMono->Checked = true;
-			this->radioButtonMono->Location = System::Drawing::Point(13, 115);
+			this->radioButtonMono->Location = System::Drawing::Point(12, 85);
 			this->radioButtonMono->Name = L"radioButtonMono";
 			this->radioButtonMono->Size = System::Drawing::Size(87, 17);
 			this->radioButtonMono->TabIndex = 5;
@@ -135,7 +135,7 @@ namespace WindowsFormApplication1 {
 			// radioButtonColor
 			// 
 			this->radioButtonColor->AutoSize = true;
-			this->radioButtonColor->Location = System::Drawing::Point(13, 139);
+			this->radioButtonColor->Location = System::Drawing::Point(12, 109);
 			this->radioButtonColor->Name = L"radioButtonColor";
 			this->radioButtonColor->Size = System::Drawing::Size(49, 17);
 			this->radioButtonColor->TabIndex = 6;
@@ -146,7 +146,7 @@ namespace WindowsFormApplication1 {
 			// textBoxPixelSize
 			// 
 			this->textBoxPixelSize->CharacterCasing = System::Windows::Forms::CharacterCasing::Upper;
-			this->textBoxPixelSize->Location = System::Drawing::Point(12, 66);
+			this->textBoxPixelSize->Location = System::Drawing::Point(12, 59);
 			this->textBoxPixelSize->Name = L"textBoxPixelSize";
 			this->textBoxPixelSize->Size = System::Drawing::Size(75, 20);
 			this->textBoxPixelSize->TabIndex = 9;
@@ -155,7 +155,7 @@ namespace WindowsFormApplication1 {
 			// label1
 			// 
 			this->label1->AutoSize = true;
-			this->label1->Location = System::Drawing::Point(13, 9);
+			this->label1->Location = System::Drawing::Point(13, 2);
 			this->label1->Name = L"label1";
 			this->label1->Size = System::Drawing::Size(57, 13);
 			this->label1->TabIndex = 10;
@@ -164,7 +164,7 @@ namespace WindowsFormApplication1 {
 			// label2
 			// 
 			this->label2->AutoSize = true;
-			this->label2->Location = System::Drawing::Point(13, 50);
+			this->label2->Location = System::Drawing::Point(13, 43);
 			this->label2->Name = L"label2";
 			this->label2->Size = System::Drawing::Size(49, 13);
 			this->label2->TabIndex = 11;
@@ -173,7 +173,7 @@ namespace WindowsFormApplication1 {
 			// checkBoxAutostretch
 			// 
 			this->checkBoxAutostretch->AutoSize = true;
-			this->checkBoxAutostretch->Location = System::Drawing::Point(14, 192);
+			this->checkBoxAutostretch->Location = System::Drawing::Point(13, 162);
 			this->checkBoxAutostretch->Name = L"checkBoxAutostretch";
 			this->checkBoxAutostretch->Size = System::Drawing::Size(80, 17);
 			this->checkBoxAutostretch->TabIndex = 12;
@@ -184,7 +184,7 @@ namespace WindowsFormApplication1 {
 			// buttonDetach
 			// 
 			this->buttonDetach->AutoSize = true;
-			this->buttonDetach->Location = System::Drawing::Point(12, 216);
+			this->buttonDetach->Location = System::Drawing::Point(12, 185);
 			this->buttonDetach->Name = L"buttonDetach";
 			this->buttonDetach->Size = System::Drawing::Size(75, 23);
 			this->buttonDetach->TabIndex = 13;
@@ -194,20 +194,26 @@ namespace WindowsFormApplication1 {
 			// 
 			// checkBoxPNG
 			// 
+			this->checkBoxPNG->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Bottom | System::Windows::Forms::AnchorStyles::Left));
 			this->checkBoxPNG->AutoSize = true;
-			this->checkBoxPNG->Location = System::Drawing::Point(16, 257);
+			this->checkBoxPNG->Checked = true;
+			this->checkBoxPNG->CheckState = System::Windows::Forms::CheckState::Checked;
+			this->checkBoxPNG->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 8.25F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(238)));
+			this->checkBoxPNG->ImageAlign = System::Drawing::ContentAlignment::MiddleLeft;
+			this->checkBoxPNG->Location = System::Drawing::Point(1, 624);
 			this->checkBoxPNG->Name = L"checkBoxPNG";
-			this->checkBoxPNG->Size = System::Drawing::Size(44, 17);
+			this->checkBoxPNG->Size = System::Drawing::Size(103, 17);
 			this->checkBoxPNG->TabIndex = 14;
-			this->checkBoxPNG->Text = L"png";
+			this->checkBoxPNG->Text = L"NoImagemagick";
+			this->checkBoxPNG->TextImageRelation = System::Windows::Forms::TextImageRelation::ImageAboveText;
 			this->checkBoxPNG->UseVisualStyleBackColor = true;
+			this->checkBoxPNG->CheckedChanged += gcnew System::EventHandler(this, &Form1::checkBoxPNG_CheckedChanged);
 			// 
 			// Form1
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->AutoSize = true;
-			this->AutoSizeMode = System::Windows::Forms::AutoSizeMode::GrowAndShrink;
 			this->ClientSize = System::Drawing::Size(740, 640);
 			this->Controls->Add(this->checkBoxPNG);
 			this->Controls->Add(this->buttonDetach);
@@ -221,6 +227,7 @@ namespace WindowsFormApplication1 {
 			this->Controls->Add(this->pictureBox);
 			this->Controls->Add(this->buttonRefresh);
 			this->Name = L"Form1";
+			this->SizeGripStyle = System::Windows::Forms::SizeGripStyle::Hide;
 			this->Text = L"Noise generator";
 			this->Load += gcnew System::EventHandler(this, &Form1::Form1_Load);
 			this->Resize += gcnew System::EventHandler(this, &Form1::Form1_Resize);
@@ -241,7 +248,7 @@ namespace WindowsFormApplication1 {
 					}
 				}
 				number = System::Int16::Parse(string);
-				if (string->Length > 3) {
+				if (string->Length > 6) {
 					string = "";
 					return 0;
 				}
@@ -257,8 +264,8 @@ namespace WindowsFormApplication1 {
 #pragma endregion
 	private: System::Void Form1_Load(System::Object^  sender, System::EventArgs^  e) {
 		
-		System::Int16 number = (int)Parsestring(textBoxResolution->Text);
-		System::Int16 pixelsize = (int)Parsestring(textBoxPixelSize->Text);
+		System::Int32 number = (int)Parsestring(textBoxResolution->Text);
+		System::Int32 pixelsize = (int)Parsestring(textBoxPixelSize->Text);
 
 		if(number*pixelsize>900 && !radioButtonColor->Checked)
 			MessageBox::Show("Creating noise can take some time,please be patient. \nPixel size also increases generating time.",
@@ -277,11 +284,15 @@ namespace WindowsFormApplication1 {
 			at.savetopng();
 		}
 		else {
-			at.savetoppm();//external console Imagemagick conversion
-			system("convert temp.ppm temp.png");
+			at.savetoppm();
+			system("convert temp.ppm temp.png");//external console Imagemagick conversion, faster
 		}
 		pictureBox->LoadAsync("temp.png");
 		//pictureBox->Image=Image::FromFile("temp.png");
+		if (checkBoxPNG->Checked)
+			textBoxPixelSize->Enabled = false;
+		else
+			textBoxPixelSize->Enabled = true;
 	}
 private: System::Void checkBoxAutostretch_CheckedChanged(System::Object^  sender, System::EventArgs^  e) {
 	if (checkBoxAutostretch->Checked)
@@ -296,9 +307,15 @@ private: System::Void buttonDetach_Click(System::Object^  sender, System::EventA
 	Form2 ^ frm11 = gcnew Form2(this,pictureBox, checkBoxAutostretch);
 	frm11->Show();
 	pictureBox->Hide();
-	this->Size = System::Drawing::Size(230, 299);
-	//
+	this->Size = System::Drawing::Size(99, 300);
+	detach = true;
 	//this->Hide();
+}
+private: System::Void checkBoxPNG_CheckedChanged(System::Object^  sender, System::EventArgs^  e) {
+	if(checkBoxPNG->Checked)
+		textBoxPixelSize->Enabled = false;
+	else
+		textBoxPixelSize->Enabled = true;
 }
 };
 

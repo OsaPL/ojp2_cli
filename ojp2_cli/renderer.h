@@ -85,12 +85,11 @@ using namespace System::Drawing;
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->AutoSize = true;
-			this->AutoSizeMode = System::Windows::Forms::AutoSizeMode::GrowAndShrink;
 			this->ClientSize = System::Drawing::Size(344, 330);
 			this->Controls->Add(this->pictureBoxDetach);
 			this->Name = L"Form2";
 			this->Text = L"Renderer";
+			this->TopMost = true;
 			this->Activated += gcnew System::EventHandler(this, &Form2::Form2_Activated);
 			this->FormClosed += gcnew System::Windows::Forms::FormClosedEventHandler(this, &Form2::Form2_FormClosed);
 			this->Load += gcnew System::EventHandler(this, &Form2::Form2_Load);
@@ -118,6 +117,7 @@ private: System::Void Form2_FormClosed(System::Object^  sender, System::Windows:
 	this->Hide();
 	otherform->Size = System::Drawing::Size(756, 679);
 	pictureBox->Show();
+	detach = false;
 }
 };
 

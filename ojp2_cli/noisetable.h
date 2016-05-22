@@ -68,20 +68,20 @@ public:
 	}
 	void savetopng() {
 		std::vector<unsigned char> image;
-		//image.reserve(size*size*4*pixelsize);
-		image.resize(size * size * 4 );
+		//image.reserve(size*size*4);  //faster, more memory leaks
+		image.resize(size * size * 4);			//slower, less memory leaks
 		int w=0, h = 0;
+		int tran = 0;
 		for (auto i = 0; i < size; i++) {
 				for (auto k = 0; k < size; k++) {
-					int tran=0;
+					w = size * i;
+					h = k;
 						if (color) {
-							w = size * i;
-							h = k;
 							image[4 * w + 4 * h + 0] = (int)table[w + h + 0 + tran];
 							image[4 * w + 4 * h + 1] = (int)table[w + h + 1 + tran];
 							image[4 * w + 4 * h + 2] = (int)table[w + h + 2 + tran];
 							image[4 * w + 4 * h + 3] = 255;
-							tran += 2;
+
 						}
 						else {
 							image[4 * w + 4 * h + 0] = (int)table[w + h + 0];
@@ -89,9 +89,10 @@ public:
 							image[4 * w + 4 * h + 2] = (int)table[w + h + 0];
 							image[4 * w + 4 * h + 3] = 255;
 						}
+						tran += 2;
 					}
-
 				}
+
 		lodepng::encode("temp.png", image, size, size);
 	}
 	double getval(int x) {
