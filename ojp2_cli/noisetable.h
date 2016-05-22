@@ -92,7 +92,6 @@ public:
 						tran += 2;
 					}
 				}
-
 		lodepng::encode("temp.png", image, size, size);
 	}
 	double getval(int x) {

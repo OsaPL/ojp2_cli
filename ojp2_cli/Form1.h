@@ -1,4 +1,3 @@
-bool detach = false;
 #pragma once
 #include "noisetable.h"
 #include "renderer.h"
@@ -150,7 +149,7 @@ namespace WindowsFormApplication1 {
 			this->textBoxPixelSize->Name = L"textBoxPixelSize";
 			this->textBoxPixelSize->Size = System::Drawing::Size(75, 20);
 			this->textBoxPixelSize->TabIndex = 9;
-			this->textBoxPixelSize->Text = L"5";
+			this->textBoxPixelSize->Text = L"1";
 			// 
 			// label1
 			// 
@@ -230,7 +229,6 @@ namespace WindowsFormApplication1 {
 			this->SizeGripStyle = System::Windows::Forms::SizeGripStyle::Hide;
 			this->Text = L"Noise generator";
 			this->Load += gcnew System::EventHandler(this, &Form1::Form1_Load);
-			this->Resize += gcnew System::EventHandler(this, &Form1::Form1_Resize);
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox))->EndInit();
 			this->ResumeLayout(false);
 			this->PerformLayout();
@@ -288,7 +286,7 @@ namespace WindowsFormApplication1 {
 			system("convert temp.ppm temp.png");//external console Imagemagick conversion, faster
 		}
 		pictureBox->LoadAsync("temp.png");
-		//pictureBox->Image=Image::FromFile("temp.png");
+		//pictureBox->Image=Image::FromFile("temp.png");  //not good, wont compile
 		if (checkBoxPNG->Checked)
 			textBoxPixelSize->Enabled = false;
 		else
@@ -300,16 +298,11 @@ private: System::Void checkBoxAutostretch_CheckedChanged(System::Object^  sender
 	else
 		pictureBox->SizeMode = PictureBoxSizeMode::CenterImage;
 }
-private: System::Void Form1_Resize(System::Object^  sender, System::EventArgs^  e) {
-	//pictureBox->Size.Width = pictureBox->Size.Height;
-}
 private: System::Void buttonDetach_Click(System::Object^  sender, System::EventArgs^  e) {
 	Form2 ^ frm11 = gcnew Form2(this,pictureBox, checkBoxAutostretch);
 	frm11->Show();
 	pictureBox->Hide();
 	this->Size = System::Drawing::Size(99, 300);
-	detach = true;
-	//this->Hide();
 }
 private: System::Void checkBoxPNG_CheckedChanged(System::Object^  sender, System::EventArgs^  e) {
 	if(checkBoxPNG->Checked)

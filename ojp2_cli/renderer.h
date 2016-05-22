@@ -104,7 +104,6 @@ using namespace System::Drawing;
 		if (ifs.is_open()) {
 			pictureBoxDetach->LoadAsync("temp.png");
 		}
-
 	}
 private: System::Void Form2_Activated(System::Object^  sender, System::EventArgs^  e) {
 	pictureBoxDetach->LoadAsync("temp.png");
@@ -117,7 +116,6 @@ private: System::Void Form2_FormClosed(System::Object^  sender, System::Windows:
 	this->Hide();
 	otherform->Size = System::Drawing::Size(756, 679);
 	pictureBox->Show();
-	detach = false;
 }
 };
 
