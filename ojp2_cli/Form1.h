@@ -236,7 +236,7 @@ namespace WindowsFormApplication1 {
 		}
 
 		private:double Parsestring(String^ string) {
-			System::Int16 number;
+			System::Int32 number;
 
 			if (string != "") {
 				for (int i = 0; i < string->Length; i++) {
@@ -245,12 +245,14 @@ namespace WindowsFormApplication1 {
 						return 0;
 					}
 				}
-				number = System::Int16::Parse(string);
-				if (string->Length > 6) {
+				number = System::Int32::Parse(string);
+				if (string->Length > 4) {
 					string = "";
 					return 0;
 				}
-				if (System::Int16::Parse(string) < 1)
+				if (System::Int32::Parse(string) < 1)
+					return 0;
+				if (System::Int32::Parse(string) > 5000)
 					return 0;
 			}
 			else {
@@ -264,6 +266,12 @@ namespace WindowsFormApplication1 {
 		
 		System::Int32 number = (int)Parsestring(textBoxResolution->Text);
 		System::Int32 pixelsize = (int)Parsestring(textBoxPixelSize->Text);
+		
+		if (number*pixelsize<1)
+			MessageBox::Show("Too big values, try again.",
+				"Important Note",
+				MessageBoxButtons::OK,
+				MessageBoxIcon::Exclamation);
 
 		if(number*pixelsize>900 && !radioButtonColor->Checked)
 			MessageBox::Show("Creating noise can take some time,please be patient. \nPixel size also increases generating time.",
