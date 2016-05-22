@@ -3,6 +3,7 @@
 #include<windows.h>
 #include<cmath>
 #include<fstream>
+#include "lodepng.h" //savetopng
 
 public class noisetable
 {
@@ -15,10 +16,9 @@ protected:
 public:
 	noisetable(int xy, bool clr,int pixels) : size(xy), color(clr), pixelsize(pixels)
 	{
-		int sizemult = size;	
+		int sizemult = size;
 		if (color)
 			sizemult *= 3;
-			
 		std::default_random_engine e1(r());
 		std::uniform_real_distribution <double> dist(0, 256);
 		table = (double*)calloc(size*sizemult, sizeof(double));
@@ -26,6 +26,11 @@ public:
 			table[j] = dist(e1);
 			//table[j] = rand() % 256;
 		}
+	}
+	void savetoppm() {
+		int sizemult = size;
+		if (color)
+			sizemult *= 3;
 
 		std::fstream file;
 		file.open("temp.ppm", std::ios::trunc | std::ios::out);
@@ -42,11 +47,11 @@ public:
 					for (auto j = 0; j < pixelsize; j++) {
 						if (color) {
 							file << (int)table[i*size + k] << " ";
-							file << (int)table[i*size + k+1] << " ";
-							file << (int)table[i*size + k+2] << " ";
+							file << (int)table[i*size + k + 1] << " ";
+							file << (int)table[i*size + k + 2] << " ";
 						}
 						else
-							file << (int)table[i*size+k] << " ";
+							file << (int)table[i*size + k] << " ";
 					}
 					if (color)
 						k += 2;
@@ -61,7 +66,34 @@ public:
 
 		file.close();
 	}
+	void savetopng() {
+		std::vector<unsigned char> image;
+		//image.reserve(size*size*4*pixelsize);
+		image.resize(size * size * 4 );
+		int w=0, h = 0;
+		for (auto i = 0; i < size; i++) {
+				for (auto k = 0; k < size; k++) {
+					int tran=0;
+						if (color) {
+							w = size * i;
+							h = k;
+							image[4 * w + 4 * h + 0] = (int)table[w + h + 0 + tran];
+							image[4 * w + 4 * h + 1] = (int)table[w + h + 1 + tran];
+							image[4 * w + 4 * h + 2] = (int)table[w + h + 2 + tran];
+							image[4 * w + 4 * h + 3] = 255;
+							tran += 2;
+						}
+						else {
+							image[4 * w + 4 * h + 0] = (int)table[w + h + 0];
+							image[4 * w + 4 * h + 1] = (int)table[w + h + 0];
+							image[4 * w + 4 * h + 2] = (int)table[w + h + 0];
+							image[4 * w + 4 * h + 3] = 255;
+						}
+					}
 
+				}
+		lodepng::encode("temp.png", image, size, size);
+	}
 	double getval(int x) {
 		return table[x];
 	}

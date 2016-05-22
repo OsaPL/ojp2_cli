@@ -52,6 +52,8 @@ namespace WindowsFormApplication1 {
 	private: System::Windows::Forms::Label^  label2;
 	private: System::Windows::Forms::CheckBox^  checkBoxAutostretch;
 	private: System::Windows::Forms::Button^  buttonDetach;
+	private: System::Windows::Forms::CheckBox^  checkBoxPNG;
+
 
 
 
@@ -82,13 +84,13 @@ namespace WindowsFormApplication1 {
 			this->label2 = (gcnew System::Windows::Forms::Label());
 			this->checkBoxAutostretch = (gcnew System::Windows::Forms::CheckBox());
 			this->buttonDetach = (gcnew System::Windows::Forms::Button());
+			this->checkBoxPNG = (gcnew System::Windows::Forms::CheckBox());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox))->BeginInit();
 			this->SuspendLayout();
 			// 
 			// buttonRefresh
 			// 
-			this->buttonRefresh->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Right));
-			this->buttonRefresh->Location = System::Drawing::Point(658, 159);
+			this->buttonRefresh->Location = System::Drawing::Point(13, 162);
 			this->buttonRefresh->Name = L"buttonRefresh";
 			this->buttonRefresh->Size = System::Drawing::Size(75, 23);
 			this->buttonRefresh->TabIndex = 0;
@@ -102,7 +104,7 @@ namespace WindowsFormApplication1 {
 				| System::Windows::Forms::AnchorStyles::Left)
 				| System::Windows::Forms::AnchorStyles::Right));
 			this->pictureBox->BackColor = System::Drawing::SystemColors::ScrollBar;
-			this->pictureBox->Location = System::Drawing::Point(-1, -1);
+			this->pictureBox->Location = System::Drawing::Point(99, 1);
 			this->pictureBox->Margin = System::Windows::Forms::Padding(0);
 			this->pictureBox->Name = L"pictureBox";
 			this->pictureBox->Size = System::Drawing::Size(640, 639);
@@ -112,8 +114,7 @@ namespace WindowsFormApplication1 {
 			// 
 			// textBoxResolution
 			// 
-			this->textBoxResolution->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Right));
-			this->textBoxResolution->Location = System::Drawing::Point(657, 25);
+			this->textBoxResolution->Location = System::Drawing::Point(12, 28);
 			this->textBoxResolution->Name = L"textBoxResolution";
 			this->textBoxResolution->Size = System::Drawing::Size(75, 20);
 			this->textBoxResolution->TabIndex = 4;
@@ -121,10 +122,9 @@ namespace WindowsFormApplication1 {
 			// 
 			// radioButtonMono
 			// 
-			this->radioButtonMono->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Right));
 			this->radioButtonMono->AutoSize = true;
 			this->radioButtonMono->Checked = true;
-			this->radioButtonMono->Location = System::Drawing::Point(658, 112);
+			this->radioButtonMono->Location = System::Drawing::Point(13, 115);
 			this->radioButtonMono->Name = L"radioButtonMono";
 			this->radioButtonMono->Size = System::Drawing::Size(87, 17);
 			this->radioButtonMono->TabIndex = 5;
@@ -134,9 +134,8 @@ namespace WindowsFormApplication1 {
 			// 
 			// radioButtonColor
 			// 
-			this->radioButtonColor->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Right));
 			this->radioButtonColor->AutoSize = true;
-			this->radioButtonColor->Location = System::Drawing::Point(658, 136);
+			this->radioButtonColor->Location = System::Drawing::Point(13, 139);
 			this->radioButtonColor->Name = L"radioButtonColor";
 			this->radioButtonColor->Size = System::Drawing::Size(49, 17);
 			this->radioButtonColor->TabIndex = 6;
@@ -146,9 +145,8 @@ namespace WindowsFormApplication1 {
 			// 
 			// textBoxPixelSize
 			// 
-			this->textBoxPixelSize->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Right));
 			this->textBoxPixelSize->CharacterCasing = System::Windows::Forms::CharacterCasing::Upper;
-			this->textBoxPixelSize->Location = System::Drawing::Point(657, 63);
+			this->textBoxPixelSize->Location = System::Drawing::Point(12, 66);
 			this->textBoxPixelSize->Name = L"textBoxPixelSize";
 			this->textBoxPixelSize->Size = System::Drawing::Size(75, 20);
 			this->textBoxPixelSize->TabIndex = 9;
@@ -156,9 +154,8 @@ namespace WindowsFormApplication1 {
 			// 
 			// label1
 			// 
-			this->label1->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Right));
 			this->label1->AutoSize = true;
-			this->label1->Location = System::Drawing::Point(658, 6);
+			this->label1->Location = System::Drawing::Point(13, 9);
 			this->label1->Name = L"label1";
 			this->label1->Size = System::Drawing::Size(57, 13);
 			this->label1->TabIndex = 10;
@@ -166,9 +163,8 @@ namespace WindowsFormApplication1 {
 			// 
 			// label2
 			// 
-			this->label2->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Right));
 			this->label2->AutoSize = true;
-			this->label2->Location = System::Drawing::Point(658, 47);
+			this->label2->Location = System::Drawing::Point(13, 50);
 			this->label2->Name = L"label2";
 			this->label2->Size = System::Drawing::Size(49, 13);
 			this->label2->TabIndex = 11;
@@ -176,9 +172,8 @@ namespace WindowsFormApplication1 {
 			// 
 			// checkBoxAutostretch
 			// 
-			this->checkBoxAutostretch->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Right));
 			this->checkBoxAutostretch->AutoSize = true;
-			this->checkBoxAutostretch->Location = System::Drawing::Point(659, 189);
+			this->checkBoxAutostretch->Location = System::Drawing::Point(14, 192);
 			this->checkBoxAutostretch->Name = L"checkBoxAutostretch";
 			this->checkBoxAutostretch->Size = System::Drawing::Size(80, 17);
 			this->checkBoxAutostretch->TabIndex = 12;
@@ -188,15 +183,24 @@ namespace WindowsFormApplication1 {
 			// 
 			// buttonDetach
 			// 
-			this->buttonDetach->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Right));
 			this->buttonDetach->AutoSize = true;
-			this->buttonDetach->Location = System::Drawing::Point(657, 213);
+			this->buttonDetach->Location = System::Drawing::Point(12, 216);
 			this->buttonDetach->Name = L"buttonDetach";
 			this->buttonDetach->Size = System::Drawing::Size(75, 23);
 			this->buttonDetach->TabIndex = 13;
 			this->buttonDetach->Text = L"Detach";
 			this->buttonDetach->UseVisualStyleBackColor = true;
 			this->buttonDetach->Click += gcnew System::EventHandler(this, &Form1::buttonDetach_Click);
+			// 
+			// checkBoxPNG
+			// 
+			this->checkBoxPNG->AutoSize = true;
+			this->checkBoxPNG->Location = System::Drawing::Point(16, 257);
+			this->checkBoxPNG->Name = L"checkBoxPNG";
+			this->checkBoxPNG->Size = System::Drawing::Size(44, 17);
+			this->checkBoxPNG->TabIndex = 14;
+			this->checkBoxPNG->Text = L"png";
+			this->checkBoxPNG->UseVisualStyleBackColor = true;
 			// 
 			// Form1
 			// 
@@ -205,6 +209,7 @@ namespace WindowsFormApplication1 {
 			this->AutoSize = true;
 			this->AutoSizeMode = System::Windows::Forms::AutoSizeMode::GrowAndShrink;
 			this->ClientSize = System::Drawing::Size(740, 640);
+			this->Controls->Add(this->checkBoxPNG);
 			this->Controls->Add(this->buttonDetach);
 			this->Controls->Add(this->checkBoxAutostretch);
 			this->Controls->Add(this->label2);
@@ -268,7 +273,13 @@ namespace WindowsFormApplication1 {
 		}
 
 		noisetable at(number, radioButtonColor->Checked, pixelsize);
-		system("convert temp.ppm temp.png");
+		if (checkBoxPNG->Checked) {
+			at.savetopng();
+		}
+		else {
+			at.savetoppm();//external console Imagemagick conversion
+			system("convert temp.ppm temp.png");
+		}
 		pictureBox->LoadAsync("temp.png");
 		//pictureBox->Image=Image::FromFile("temp.png");
 	}
@@ -279,14 +290,13 @@ private: System::Void checkBoxAutostretch_CheckedChanged(System::Object^  sender
 		pictureBox->SizeMode = PictureBoxSizeMode::CenterImage;
 }
 private: System::Void Form1_Resize(System::Object^  sender, System::EventArgs^  e) {
-	pictureBox->Size.Width = pictureBox->Size.Height;
+	//pictureBox->Size.Width = pictureBox->Size.Height;
 }
 private: System::Void buttonDetach_Click(System::Object^  sender, System::EventArgs^  e) {
-	this->Size.Width = 105;
-	this->Size.Height = 205;
 	Form2 ^ frm11 = gcnew Form2(this,pictureBox, checkBoxAutostretch);
 	frm11->Show();
 	pictureBox->Hide();
+	this->Size = System::Drawing::Size(230, 299);
 	//
 	//this->Hide();
 }

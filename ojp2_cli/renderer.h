@@ -116,7 +116,7 @@ private: System::Void Form2_Activated(System::Object^  sender, System::EventArgs
 }
 private: System::Void Form2_FormClosed(System::Object^  sender, System::Windows::Forms::FormClosedEventArgs^  e) {
 	this->Hide();
-	otherform->Size.Width = 756;
+	otherform->Size = System::Drawing::Size(756, 679);
 	pictureBox->Show();
 }
 };
